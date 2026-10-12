@@ -28,16 +28,18 @@ class DepositoStrumenti:
     def __init__(self, nome, responsabile):
         """Inizializza gli attributi e le strutture dati"""
         self.nome = nome
-        self.responsabile = responsabile
+        self._responsabile = responsabile
         self.strumenti = {}
         self.prestiti = {}
-        self.contatore_prestiti = {}
+        self.contatore_prestiti = 1
 
+    @property
     def responsabile(self):
-        return self.responsabile
+        return self._responsabile
 
+    @responsabile.setter
     def responsabile(self,nuovo_nome):
-        self.responsabile = nuovo_nome
+        self._responsabile = nuovo_nome
 
 
 
@@ -49,7 +51,7 @@ class DepositoStrumenti:
                 if not riga:
                     continue
 
-                pezzi = riga.split(";")
+                pezzi = riga.split(",")
                 codice = pezzi[0]
                 s = Strumento(codice, pezzi[1], pezzi[2], pezzi[3], pezzi[4])
                 self.strumenti[codice] = s
